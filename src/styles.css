@@ -124,8 +124,8 @@
   --card-foreground: oklch(0.93 0.02 85);
   --popover: oklch(0.26 0.022 68);
   --popover-foreground: oklch(0.93 0.02 85);
-  --primary: oklch(0.7 0.16 35);
-  --primary-hover: oklch(0.75 0.15 38);
+  --primary: oklch(0.62 0.15 32);
+  --primary-hover: oklch(0.67 0.15 34);
   --primary-foreground: oklch(0.98 0.01 88);
   --secondary: oklch(0.31 0.025 68);
   --secondary-foreground: oklch(0.93 0.02 85);
@@ -916,22 +916,47 @@
 .dark .avatar-yellow { background: oklch(0.52 0.1 88); }
 .dark .summary-sheet { box-shadow: 5px 7px 0 oklch(0 0 0 / .3); }
 
-/* Tema düğmesi — defter kağıdından kesilmiş yuvarlak bir düğme. */
+/* Tema anahtarı — güneş ve ay arasında kayan bir switch. */
 .theme-toggle {
   position: relative;
   z-index: 20;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  justify-content: space-between;
+  width: 4.1rem;
+  height: 2.15rem;
+  padding: 0 .55rem;
   flex: none;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: var(--card);
-  color: var(--foreground);
-  box-shadow: inset 0 1px 2px var(--notebook-inset-shadow), 0 1px 0 var(--notebook-inset-highlight);
-  transition: background .18s ease, transform .12s ease;
+  background: var(--notebook-inset);
+  box-shadow: inset 0 1px 3px var(--notebook-inset-shadow), 0 1px 0 var(--notebook-inset-highlight);
+  cursor: pointer;
 }
-.theme-toggle:hover { background: color-mix(in oklab, var(--card) 88%, var(--foreground)); }
-.theme-toggle:active { transform: translateY(1px); }
+.theme-toggle-icon {
+  position: relative;
+  z-index: 1;
+  width: .95rem;
+  height: .95rem;
+  color: var(--muted-foreground);
+  opacity: .55;
+  transition: color .25s ease, opacity .25s ease;
+}
+.theme-toggle .theme-toggle-sun { color: oklch(0.7 0.16 70); opacity: 1; }
+.dark .theme-toggle .theme-toggle-sun { color: var(--muted-foreground); opacity: .55; }
+.dark .theme-toggle .theme-toggle-moon { color: oklch(0.82 0.1 250); opacity: 1; }
+.theme-toggle-thumb {
+  position: absolute;
+  top: 50%;
+  left: .22rem;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 5px var(--paper-shadow), inset 0 1px 0 var(--notebook-inset-highlight);
+  transform: translateY(-50%);
+  transition: transform .32s cubic-bezier(.45, 1.4, .4, 1), background .25s ease;
+}
+.dark .theme-toggle-thumb { transform: translateY(-50%) translateX(1.95rem); }
+.theme-toggle:active .theme-toggle-thumb { width: 1.75rem; }
