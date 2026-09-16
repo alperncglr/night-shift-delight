@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, CircleStop, Download, FileText, Loader2, Pause, Play, RotateCcw } from "lucide-react";
+import { Check, CircleStop, Download, FileText, Loader2, Moon, Pause, Play, RotateCcw, Sun } from "lucide-react";
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 
 import { ChromaKeyVideo } from "@/components/chroma-key-video";
@@ -87,6 +87,7 @@ function Index() {
   const [transcriptStatus, setTranscriptStatus] = useState<DocStatus>("idle");
   const [travelStartTop, setTravelStartTop] = useState<number | null>(null);
   const [isPaused, setIsPaused] = useState(false);
+  const [isDark, setIsDark] = useState(false);
   const [introVisible, setIntroVisible] = useState(true);
   const [introReady, setIntroReady] = useState(false);
   const [introStarted, setIntroStarted] = useState(false);
@@ -230,6 +231,23 @@ function Index() {
     const fallback = window.setTimeout(() => setIntroVisible(false), 6400);
     return () => window.clearTimeout(fallback);
   }, [introStarted]);
+
+  // Gece modu tercihi tarayıcıda saklanıyor; sayfa ilk açılışta __root'taki
+  // betikle uygulanıyor, burada yalnızca düğmenin ikonu senkronize ediliyor.
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains("dark"));
+  }, []);
+
+  function toggleTheme() {
+    const next = !isDark;
+    document.documentElement.classList.toggle("dark", next);
+    try {
+      localStorage.setItem("deft3r-theme", next ? "dark" : "light");
+    } catch {
+      // localStorage kapalıysa seçim yalnızca bu oturum için geçerli kalır.
+    }
+    setIsDark(next);
+  }
 
   // Toplantı videosunu, kullanıcı "Toplantıyı Başlat"a basmadan önce arka
   // planda önceden yükle — aksi halde ilk tıklamada video ağdan inene kadar
