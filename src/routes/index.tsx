@@ -401,10 +401,14 @@ function Index() {
           type="button"
           className="theme-toggle ml-3"
           onClick={toggleTheme}
+          role="switch"
+          aria-checked={isDark}
           aria-label={isDark ? "Gündüz moduna geç" : "Gece moduna geç"}
           title={isDark ? "Gündüz modu" : "Gece modu"}
         >
-          {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
+          <Sun className="theme-toggle-icon theme-toggle-sun" aria-hidden="true" />
+          <Moon className="theme-toggle-icon theme-toggle-moon" aria-hidden="true" />
+          <span className="theme-toggle-thumb" aria-hidden="true" />
         </button>
       </header>
 
