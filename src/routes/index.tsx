@@ -397,6 +397,15 @@ function Index() {
             <Button variant="danger" size="sm" className="meeting-toolbar-btn meeting-toolbar-btn-danger rounded-full" onClick={endMeeting}><CircleStop className="size-4" /> Bitir</Button>
           </div>
         )}
+        <button
+          type="button"
+          className="theme-toggle ml-3"
+          onClick={toggleTheme}
+          aria-label={isDark ? "Gündüz moduna geç" : "Gece moduna geç"}
+          title={isDark ? "Gündüz modu" : "Gece modu"}
+        >
+          {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
+        </button>
       </header>
 
       <section className="relative z-10 mx-auto flex min-h-[calc(100vh-84px)] max-w-5xl flex-col px-5 pb-8 sm:px-8">
